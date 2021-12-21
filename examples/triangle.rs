@@ -66,6 +66,7 @@ fn main() {
         primitive: wgpu::PrimitiveState::default(),
         depth_stencil: None,
         multisample: wgpu::MultisampleState::default(),
+        multiview: None,
     });
 
     // Main loop
@@ -88,8 +89,8 @@ fn main() {
                 {
                     let frame = smaa_target.start_frame(&device, &queue, &output_view);
 
-                    let mut encoder =
-                        device.create_command_encoder(&wgpu::CommandEncoderDescriptor { label: None });
+                    let mut encoder = device
+                        .create_command_encoder(&wgpu::CommandEncoderDescriptor { label: None });
                     {
                         let mut rpass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                             label: None,
